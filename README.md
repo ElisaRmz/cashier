@@ -2,12 +2,13 @@
 
 You can add products to a cart and compute the total price. Additionally, discounts can be applied to products.
 
-## Installation
-
 ## Usage
 
-TODO: Write usage instructions here
+Start the program and follow the instrucctions
+`$ bin/cashier`
+
+To exit the program hit `CTLR+C`
 
 ## Development
 
-Put your Ruby code in the file `lib/cashier`. To experiment with that code, run `bin/console` for an interactive prompt.
+Put your Ruby code in `lib/cashier`. To experiment with that code, run `bin/console` for an interactive prompt.

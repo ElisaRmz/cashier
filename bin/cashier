@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/cashier"
+
+puts "Welcome to CASHIER"
+puts "Use SCAN PROCUCT_CODE to add a new producto to the Cart"
+puts "Use TOTAL to get the cart price"
+
+cashier = Cashier::Cart.new
+
+loop do
+  command = gets.strip
+
+  case command
+  when /^SCAN .+/
+    cashier.add_product(command.split.last)
+  when /^TOTAL/
+    puts cashier.total_price
+  else 
+    puts "I don't recognize the command #{command}"
+  end
+end
+
