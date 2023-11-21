@@ -12,16 +12,20 @@ class Cashier::Cart
     (subtotal - discount) / 100.0
   end
 
+  def add_product(product)
+    raise Cashier::UnknownProduct, "Unknown product" unless @product_registry.key?(product)
+
+    @product_list << @product_registry[product]
+  end
+
+  private
+
   def subtotal
     @product_list.sum { |product| product[:price] }
   end
 
   def discount
     gr1_discount + sr1_discount + cf1_discount
-  end
-
-  def add_product(product)
-    @product_list << @product_registry[product]
   end
 
   def gr1_discount

@@ -40,4 +40,8 @@ RSpec.describe Cashier::Cart do
 
     expect(@cart.total_price).to eq 30.57
   end
+
+  it "send an error message when a wrong product is added" do
+    expect { @cart.add_product("WWW") }.to raise_error(Cashier::UnknownProduct, "Unknown product")
+  end
 end

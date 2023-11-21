@@ -5,7 +5,7 @@ loader = Zeitwerk::Loader.for_gem
 loader.setup
 
 module Cashier
-  class Error < StandardError; end
+  class UnknownProduct < StandardError; end
   # Your code goes here...
   #
 end
