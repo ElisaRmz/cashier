@@ -1,45 +1,19 @@
 class Cashier::Cart
   def initialize
-    @product_list = []
-    @product_registry = {
-      "GR1" => { name: "Green Tea", price: 311, discount: "2x1" },
-      "SR1" => { name: "Strawberries", price: 500, discount: "> 3" },
-      "CF1" => { name: "Coffee", price: 1123, discount: "3x2" }
-    }
+    @product_list = Hash.new(0)
   end
 
   def total_price
-    (subtotal - discount) / 100.0
+    (subtotal - Cashier::Discounts.total(@product_list)) / 100.0
   end
 
-  def add_product(product)
-    raise Cashier::UnknownProduct, "Unknown product" unless @product_registry.key?(product)
-
-    @product_list << @product_registry[product]
+  def add_product(product_code)
+    @product_list[Cashier::ProductRegistry.find(product_code)] += 1
   end
 
   private
 
   def subtotal
-    @product_list.sum { |product| product[:price] }
-  end
-
-  def discount
-    gr1_discount + sr1_discount + cf1_discount
-  end
-
-  def gr1_discount
-    number_of_products = @product_list.count { |product| product[:name] == "Green Tea" }
-    (number_of_products / 2).floor * 311
-  end
-
-  def sr1_discount
-    number_of_products = @product_list.count { |product| product[:name] == "Strawberries" }
-    (number_of_products / 3).floor * (50 * 3)
-  end
-
-  def cf1_discount
-    number_of_products = @product_list.count { |product| product[:name] == "Coffee" }
-    (number_of_products / 3).floor * 1123
+    @product_list.sum { |product, quantity| product[:price] * quantity }
   end
 end
