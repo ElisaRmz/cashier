@@ -1,11 +1,6 @@
-# frozen_string_literal: true
-
-require "zeitwerk"
-loader = Zeitwerk::Loader.for_gem
-loader.setup
-
 module Cashier
+  require_relative "cashier/cart"
+  require_relative "cashier/product_registry"
+  require_relative "cashier/discounts"
   class UnknownProduct < StandardError; end
-  # Your code goes here...
-  #
 end
