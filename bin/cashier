@@ -3,8 +3,10 @@
 require_relative "../lib/cashier"
 
 puts "Welcome to CASHIER"
-puts "Use SCAN PROCUCT_CODE to add a new producto to the Cart"
+puts "Use SCAN PRODUCT_CODE to add a new product to the Cart"
+puts "PRODUCT_CODES: GR1, SR1, CF1"
 puts "Use TOTAL to get the cart price"
+puts "Use CLEAN to empty the cart"
 
 cashier = Cashier::Cart.new
 
@@ -16,8 +18,10 @@ loop do
     cashier.add_product(command.split.last)
   when /^TOTAL/
     puts cashier.total_price
-  else 
+  when /^CLEAN/
+    cashier.clean
+    puts "Empty Cart"
+  else
     puts "I don't recognize the command #{command}"
   end
 end
-
